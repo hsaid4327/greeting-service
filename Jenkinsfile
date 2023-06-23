@@ -24,7 +24,7 @@ pipeline{
         // Add the "Deploy" stage here
       stage("deployment") {
          steps {
-         ''' 
+         sh ''' 
          oc project hsaid-greetings
          oc start-build bc/greeting-service --follow --wait
          '''
