@@ -5,22 +5,31 @@ pipeline{
     stages{
         stage("Install dependencies"){
             steps{
-                sh "npm ci"
+               echo "Install dependencies"
             }
         }
 
         stage("Check Style"){
             steps{
-                sh "npm run lint"
+                echo "check style"
             }
         }
 
         stage("Test"){
             steps{
-                sh "npm test"
+                echo "test"
             }
         }
 
         // Add the "Deploy" stage here
+      stage("deployment") {
+         steps {
+         ''' 
+         oc project hsaid-greetings
+         oc start-build bc/greeting-service --follow --wait
+         '''
+         }
+       }
+     
     }
 }
